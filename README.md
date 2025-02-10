@@ -1,4 +1,4 @@
-# MP3 Splitter
+# MP3 Splitter (& Track Identification)
 
 A simple Python script offering two functionalities:
 
