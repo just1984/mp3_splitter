@@ -29,7 +29,7 @@ A simple Python script offering two functionalities:
    ```bash
    pip install pydub tqdm
 
-3. **Usage**
+## **Usage**
 
 `python mp3splitter.py`
 
