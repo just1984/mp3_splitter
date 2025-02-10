@@ -28,3 +28,5 @@ A simple Python script offering two functionalities:
    Install the Python packages using pip:
    ```bash
    pip install pydub tqdm
+
+![MP3 Symbol](./mp3.jpg)

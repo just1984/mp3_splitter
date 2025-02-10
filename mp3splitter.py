@@ -1,5 +1,4 @@
 import os
-import sys
 from pydub import AudioSegment
 from pydub.silence import split_on_silence
 from tqdm import tqdm
@@ -39,25 +38,22 @@ def analyze_mp3_files(input_folder, output_folder, min_silence_len=2000, silence
         if filename.lower().endswith(".mp3"):
             input_path = os.path.join(input_folder, filename)
             base_name = os.path.splitext(filename)[0]
-            print(f"Analyzing {filename}...", flush=True)
-
-            print("Loading audio...", flush=True)
+            print(f"\nLoading and analyzing {filename} ..", flush=True)
             audio = AudioSegment.from_mp3(input_path)
-            print("Audio loaded. Analyzing silence...", flush=True)
+            print("Silent Segment Detection (this may take some time) ..", flush=True)
             tracks = split_on_silence(audio, min_silence_len=min_silence_len, silence_thresh=silence_thresh)
-            print("Silence analysis complete.", flush=True)
-            print(f"Found {len(tracks)} potential tracks in {filename}.", flush=True)
-
+            print("Silence Analysis Complete ..", flush=True)
+            print(f"\nFound {len(tracks)} potential tracks in {filename}.", flush=True)
             choice = input("Do you want to export these tracks? (y/n): ")
             if choice.lower() == "y":
                 target_folder = os.path.join(output_folder, base_name)
                 if not os.path.exists(target_folder):
                     os.makedirs(target_folder)
-                for i, track in enumerate(tqdm(tracks, desc="Exporting tracks", unit="track"), start=1):
+                for i, track in enumerate(tqdm(tracks, desc="\nExporting tracks", unit="track"), start=1):
                     track_filename = f"{base_name}_track_{i}.mp3"
                     output_path = os.path.join(target_folder, track_filename)
                     track.export(output_path, format="mp3")
-                print(f"Export complete for {filename}.", flush=True)
+                print(f"Export complete for {filename}.\n", flush=True)
             else:
                 print(f"Skipping export for {filename}.", flush=True)
 
@@ -65,9 +61,9 @@ def main():
     input_folder = "/home/just161/code/Tonie/input"
     output_folder = "/home/just161/code/Tonie/output"
 
-    print("Options:")
+    print("\nOptions:")
     print("1: Split MP3 into chunks")
-    print("2: Detect songs based on silence")
+    print("2: Detect songs based on silent segments")
     mode = input("Your choice (1/2): ")
 
     if mode == "1":
