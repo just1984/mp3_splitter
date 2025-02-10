@@ -29,4 +29,9 @@ A simple Python script offering two functionalities:
    ```bash
    pip install pydub tqdm
 
+3. **Usage**
+
+`python mp3splitter.py`
+
+
 ![MP3 Symbol](./mp3.jpg)
