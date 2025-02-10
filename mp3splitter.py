@@ -1,6 +1,6 @@
 import os
 
-def split_mp3_files(input_folder, output_folder, max_chunk_size=5 * 1024 * 1024):
+def split_mp3_files(input_folder, output_folder, max_chunk_size=3 * 1024 * 1024):
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
 
@@ -9,6 +9,7 @@ def split_mp3_files(input_folder, output_folder, max_chunk_size=5 * 1024 * 1024)
             input_path = os.path.join(input_folder, filename)
             base_name = os.path.splitext(filename)[0]
             
+            # Unterordner mit dem Namen der Originaldatei
             target_folder = os.path.join(output_folder, base_name)
             if not os.path.exists(target_folder):
                 os.makedirs(target_folder)
@@ -19,7 +20,7 @@ def split_mp3_files(input_folder, output_folder, max_chunk_size=5 * 1024 * 1024)
                     chunk = mp3_file.read(max_chunk_size)
                     if not chunk:
                         break
-                    
+
                     chunk_filename = f"{base_name}_{chunk_index}.mp3"
                     output_path = os.path.join(target_folder, chunk_filename)
                     
@@ -31,7 +32,6 @@ def split_mp3_files(input_folder, output_folder, max_chunk_size=5 * 1024 * 1024)
 def main():
     input_folder = "/home/just161/code/Tonie/input"
     output_folder = "/home/just161/code/Tonie/output"
-
     split_mp3_files(input_folder, output_folder)
 
 if __name__ == "__main__":
